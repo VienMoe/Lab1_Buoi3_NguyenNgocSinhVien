@@ -11,6 +11,7 @@ import {
   Platform,
   StatusBar,
   KeyboardAvoidingView,
+  ScrollView, // Import ScrollView
 } from "react-native";
 import { useWindowDimensions } from "react-native";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
@@ -46,48 +47,55 @@ const App = () => {
         backgroundColor={isPortrait ? "#fff" : "#000"}
       />
 
-      <Image
-        source={{
-          uri: "https://i.pinimg.com/564x/7f/5a/09/7f5a09ba85f719b7f6c288098fb38aaa.jpg",
-        }}
-        style={{ width: imageWidth, height: imageHeight, marginBottom: 20 }}
-        resizeMode="contain"
-      />
-
-      <KeyboardAvoidingView
-        style={{ flex: 1, width: "100%" }}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContent}
+        style={{ flex: 1 }}
+        horizontal={false} // Cho phép cuộn dọc
+        contentOffset={{ x: 0, y: 0 }}
       >
-        <TextInput placeholder="Đây là ai??" style={styles.input} />
+        <Image
+          source={{
+            uri: "https://i.pinimg.com/564x/7f/5a/09/7f5a09ba85f719b7f6c288098fb38aaa.jpg",
+          }}
+          style={{ width: imageWidth, height: imageHeight, marginBottom: 20 }}
+          resizeMode="contain"
+        />
 
-        <View
-          style={[
-            styles.buttonContainer,
-            isPortrait ? styles.column : styles.row,
-          ]}
+        <KeyboardAvoidingView
+          style={{ flex: 1, width: "100%" }}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
         >
-          <TouchableOpacity style={[styles.button, { width: buttonWidth }]}>
-            <Text style={styles.buttonText}>Klee</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, { width: buttonWidth }]}>
-            <Text style={styles.buttonText}>CỜ lI</Text>
-          </TouchableOpacity>
-        </View>
+          <TextInput placeholder="Đây là ai??" style={styles.input} />
 
-        <View
-          style={[
-            styles.buttonContainer,
-            isPortrait ? styles.column : styles.row,
-          ]}
-        >
-          <TouchableOpacity style={[styles.button, { width: buttonWidth }]}>
-            <Text style={styles.buttonText}>KLI</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, { width: buttonWidth }]}>
-            <Text style={styles.buttonText}>KỜ LEE</Text>
-          </TouchableOpacity>
-        </View>
-      </KeyboardAvoidingView>
+          <View
+            style={[
+              styles.buttonContainer,
+              isPortrait ? styles.column : styles.row,
+            ]}
+          >
+            <TouchableOpacity style={[styles.button, { width: buttonWidth }]}>
+              <Text style={styles.buttonText}>Klee</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button, { width: buttonWidth }]}>
+              <Text style={styles.buttonText}>CỜ lI</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View
+            style={[
+              styles.buttonContainer,
+              isPortrait ? styles.column : styles.row,
+            ]}
+          >
+            <TouchableOpacity style={[styles.button, { width: buttonWidth }]}>
+              <Text style={styles.buttonText}>KLI</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button, { width: buttonWidth }]}>
+              <Text style={styles.buttonText}>KỜ LEE</Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -99,6 +107,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
+  },
+  scrollViewContent: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 20,
   },
   input: {
     height: 50,
